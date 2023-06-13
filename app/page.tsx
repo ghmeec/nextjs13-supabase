@@ -53,6 +53,9 @@ export default async function Home() {
 
   const { data: { session } } = await supabase.auth.getSession()
 
+  console.log("session")
+  console.log(session)
+
   if (!session) {
     redirect("/login")
   }
@@ -60,10 +63,6 @@ export default async function Home() {
   const { data, error } = await supabase
     .from("todos")
     .select()
-
-  console.log("data")
-  console.log(data)
-
 
   return (
     <div className="bg-[#f5f5f5] ">
