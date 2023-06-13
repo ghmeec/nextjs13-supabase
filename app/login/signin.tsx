@@ -3,6 +3,8 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import toast from 'react-hot-toast';
+
 
 import type { Database } from '@/lib/database.types'
 
@@ -12,37 +14,66 @@ export default function Signin() {
     const router = useRouter()
     const supabase = createClientComponentClient<Database>()
 
+    const [signInLoading, setSignInLoading] = useState(false)
+    const [signUpLoading, setSignUpLoading] = useState(false)
+
     const handleSignUp = async () => {
-        const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-                data: {
-                    first_name: 'George Millanzi',
-                    age: 27,
+        try {
+            setSignUpLoading(true)
+            const { data, error } = await supabase.auth.signUp({
+                email,
+                password,
+                options: {
+                    data: {
+                        first_name: 'George Millanzi',
+                        age: 27,
+                    },
+                    emailRedirectTo: `${location.origin}/auth/callback`,
                 },
-                emailRedirectTo: `${location.origin}/auth/callback`,
-            },
-        })
-        if (error) {
-            console.log("error occured")
-            console.log(error)
-            return
+            })
+            if (error) {
+                console.log("error occured")
+                console.log(error)
+                toast.error(JSON.stringify(error))
+                return
+            }
+
+            toast.success('Successfully signned up in redirecting!')
+            router.refresh()
         }
-        router.refresh()
+        catch (e) {
+
+        }
+        finally {
+            setSignUpLoading(false)
+        }
+
     }
 
     const handleSignIn = async () => {
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email,
-            password,
-        })
-        if (error) {
-            console.log("error occured")
-            console.log(error)
-            return
+
+        try {
+            setSignInLoading(true)
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            })
+            if (error) {
+                console.log("error occured")
+                console.log(error)
+                toast.error(JSON.stringify(error))
+                return
+            }
+            toast.success('Successfully signed in..Redirecting!')
+            router.refresh()
         }
-        router.refresh()
+        catch (e) {
+
+        }
+        finally {
+            setSignInLoading(false)
+        }
+
     }
 
     return (
