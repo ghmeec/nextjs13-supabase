@@ -78,8 +78,8 @@ export default function Signin() {
     }
 
     return (
-        <div className="h-screen flex items-center justify-center">
-            <div className="bg-white w-[420px]  mx-auto border border-slate-900 p-4">
+        <div className="h-screen bg-[#f5f5f5] flex items-center justify-center">
+            <div className="bg-white w-[420px]  mx-auto border border-[#cecece] p-4">
                 <div>
                     <label htmlFor="email">Email</label>
                     <input name="email" onChange={(e) => setEmail(e.target.value)} value={email}
