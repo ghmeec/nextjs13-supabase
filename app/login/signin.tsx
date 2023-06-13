@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 
 
 import type { Database } from '@/lib/database.types'
+import clsx from 'clsx';
 
 export default function Signin() {
     const [email, setEmail] = useState('')
@@ -96,8 +97,44 @@ export default function Signin() {
                     />
                 </div>
                 <div className="mt-4 space-x-2">
-                    <button onClick={handleSignUp} className="bg-blue-700 text-white px-6 py-2">Sign up</button>
-                    <button onClick={handleSignIn} className="bg-blue-700 text-white px-6 py-2">Sign in</button>
+
+                    <button onClick={handleSignIn} className={
+                        clsx(
+                            "bg-blue-700 text-white px-6 py-2",
+                            signInLoading && "cursor-not-allowed bg-blue-400"
+                        )
+                    }>
+                        {
+                            signInLoading ?
+                                <>
+                                    Signing in ...
+                                </>
+                                :
+                                <>
+                                    Sign in
+                                </>
+                        }
+                    </button>
+
+                    <button onClick={handleSignUp} className={
+                        clsx(
+                            "bg-blue-700 text-white px-6 py-2",
+                            signUpLoading && "cursor-not-allowed bg-blue-400"
+                        )
+                    }>
+                        {
+                            signUpLoading ?
+                                <>
+                                    Signing up ...
+                                </>
+                                :
+                                <>
+                                    Sign up
+                                </>
+                        }
+
+                    </button>
+
                 </div>
 
             </div>

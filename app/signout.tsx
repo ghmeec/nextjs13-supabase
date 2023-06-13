@@ -4,13 +4,21 @@ import React from 'react'
 import { Database } from '@/lib/database.types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast';
 
 export default function Signout() {
     const supabase = createClientComponentClient<Database>()
     const router = useRouter()
 
     const handleSignOut = async () => {
-        await supabase.auth.signOut()
+        try {
+            await supabase.auth.signOut()
+            toast.success("successfully signed out. Redirecting")
+        } catch (e) {
+
+        } finally {
+
+        }
         router.refresh()
     }
 
