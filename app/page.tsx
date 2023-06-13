@@ -74,7 +74,7 @@ export default async function Home() {
           <div className="space-y-2">
             {data?.map((todo: Database["public"]["Tables"]["todos"]["Row"], index: number) => {
               return (
-                <div className="bg-[#dedede] p-2">
+                <div className="bg-[#dedede] p-2" key={todo.id}>
                   <Todo todo={todo} index={index} />
 
                   <div className="flex items-center space-x-4">

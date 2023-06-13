@@ -31,7 +31,7 @@ export default function Todo({ todo, index }: { index: number, todo: Database["p
 
         console.log("Deleting : ", 1)
 
-
+        const supabase = createClientComponentClient()
         const { error, data } = await supabase
             .from('todos')
             .delete()
