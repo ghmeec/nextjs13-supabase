@@ -39,7 +39,7 @@ export default function Signin() {
                 return
             }
 
-            toast.success('Successfully signned up in redirecting!')
+            toast.success('Successfully signned up in. You can now sign in!')
             router.refresh()
         }
         catch (e) {
