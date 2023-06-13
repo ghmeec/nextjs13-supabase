@@ -26,7 +26,7 @@ export default function Signin() {
         })
         if (error) {
             console.log("error occured")
-            console.log(error?.error_description)
+            console.log(error)
             return
         }
         router.refresh()
